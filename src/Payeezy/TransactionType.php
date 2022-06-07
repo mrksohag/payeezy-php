@@ -140,4 +140,31 @@ class Payeezy_TransactionType extends Payeezy_Transaction
     $args['method'] = $this->method;
     return parent::doPrimaryTransaction($args);
   }
+
+  /**
+   * Payeezy
+   *
+   * recurring Transaction
+   */
+
+  public function recurring($args = array())
+  {
+    $args['transaction_type'] = 'recurring';
+    $args['method'] = $this->method;
+    return parent::doPrimaryTransaction($args);
+  }
+
+  /**
+   * Payeezy
+   *
+   * Tokenize Credit Card
+   * Use this method to create FDTokens when Direct API, iOS/Android SDKs are used. 
+   * Note: US Merchants will be getting Transarmor multi-use tokens when this method is used.
+   */
+  
+  public function tokenize($args = array())
+  {
+    $args['type'] = $this->method;
+    return parent::doSecondaryTransaction('tokens', $args);
+  }
 }
